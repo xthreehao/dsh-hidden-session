@@ -1,0 +1,31 @@
+# 本插件免构建（lib/*.js 就是交付产物），所以 CI 只做两件能真正兜住问题的事：
+# 1) 语法：node --check 每个 JS 文件（这正是本地最容易被跳过的检查）；
+# 2) 清单：scripts/check-manifest.mjs —— 与本地跑的是同一份脚本，校验
+#    dsh.client.platform / exports["./client"] / dsh.bundle.patch / main 是否指向真实文件，
+#    以及浏览器半注册的模块 id 是否等于包名。
+name: check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  syntax-and-manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Syntax check
+        run: |
+          node --check lib/index.js
+          node --check lib/client.js
+          node --check scripts/smoke.mjs
+          node --check scripts/check-manifest.mjs
+          node --check tools/asar-peek.mjs
+          node --check tools/graph-peek.mjs
+
+      - name: Manifest check
+        run: node scripts/check-manifest.mjs

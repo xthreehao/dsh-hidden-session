@@ -1,0 +1,7 @@
+# dsh-hidden-session plugin registration patch
+# 把本插件插入 web profile 的 Cordis 行栈。
+# Host 半（exports "."）注册 /api/dsh-hidden-session/* 路由并持久化隐藏集合；
+# 浏览器半（exports "./client"）向侧边栏会话行注入「隐藏」动作，并注册设置页管理卡片。
+- insert:
+    - id: hidden-session
+      name: 'dsh-hidden-session'
