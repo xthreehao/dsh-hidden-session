@@ -1,5 +1,8 @@
 # dsh-hidden-session —— DSH 隐藏会话插件
 
+[![check](https://github.com/xthreehao/dsh-hidden-session/actions/workflows/check.yml/badge.svg)](https://github.com/xthreehao/dsh-hidden-session/actions/workflows/check.yml)
+![license](https://img.shields.io/badge/license-MIT-blue.svg)
+
 把不想出现在侧边栏的会话**隐藏**起来，随时可以恢复。隐藏只作用于显示层：会话本身、
 历史记录、磁盘数据、Workspace 归属都不会被改动。
 
@@ -7,6 +10,7 @@
 - **管理**：设置里的「隐藏会话」页（列出 / 逐个恢复 / 全部恢复）
 - **持久化**：宿主侧 `~/.dsh/storages/dsh-hidden-session.json`，重启与换浏览器都保持
 - **可选**：同时抑制搜索结果中的隐藏会话
+- **免构建、零运行时依赖**：`lib/*.js` 就是交付产物，只用 Module Loader 提供的 `react`
 
 ---
 
